@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { userData } from "./UserData";
-import { LOGIN_PATH } from "../Menu/Menu";
+import { LOGIN_PATH } from "./Login";
 
 export const AuthContext = createContext();
 
@@ -25,6 +25,7 @@ export function AuthProvider({children}) {
         } 
     }
     const logout = () => {
+        console.log(`The user ${user} logged out`);
         setUser(null);
         navigate(LOGIN_PATH);
     }
@@ -42,4 +43,15 @@ export function AuthProvider({children}) {
 
 export function useAuth() {
     return useContext(AuthContext);
+}
+
+export function AuthOnly({children}) {
+    
+    const auth = useAuth();
+
+    if (!auth.user) {
+        return <Navigate to = {LOGIN_PATH}/>
+    } else {
+        return children;
+    }
 }

@@ -1,7 +1,8 @@
 import React from 'react';
 import { blogData } from './BlogData';
-import { BLOG_PATH } from '../Menu/Menu';
 import { Link } from 'react-router-dom';
+
+export const BLOG_PATH = "/blog";
 
 export function Blog() {
     return (

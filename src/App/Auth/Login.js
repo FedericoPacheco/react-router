@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useAuth } from './AuthContext';
-import { useNavigate } from 'react-router-dom';
-import { HOME_PATH } from '../Menu/Menu';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { HOME_PATH } from '../Home/Home';
+
+export const LOGIN_PATH = "/login";
 
 export function Login() {
     const auth = useAuth();
@@ -19,22 +21,27 @@ export function Login() {
         }
     }
 
-    console.log("wasSucessful:", wasSuccessful);
     console.log("auth.user:", auth.user);
 
-    return (
-        <>
-            <h1>Login</h1>
-            <form onSubmit = {validate}>
-                <label>User: <input
-                    onChange = {(e) => setUser(e.target.value)}
-                /></label>
-                <label>Pass: <input
-                    onChange = {(e) => setPass(e.target.value)}
-                /></label>
-                <button type = "submit">Login</button>
-            </form>
-            {!wasSuccessful && <p>Wrong credentials. Try again.</p>}
-        </>
-    );
+    // i.e. you have to login
+    if (!auth.user) {
+        return (
+            <>
+                <h1>Login</h1>
+                <form onSubmit = {validate}>
+                    <label>User: <input
+                        onChange = {(e) => setUser(e.target.value)}
+                    /></label>
+                    <label>Pass: <input
+                        onChange = {(e) => setPass(e.target.value)}
+                    /></label>
+                    <button type = "submit">Login</button>
+                </form>
+                {!wasSuccessful && <p>Wrong credentials. Try again.</p>}
+            </>
+        );
+    // i.e. don't login again
+    } else {
+        return <Navigate to = {HOME_PATH}/>
+    }
 }
