@@ -1,10 +1,12 @@
 import React from 'react';
-import { blogData } from './BlogData';
+import { getBlogs } from '../Data/BlogData.js';
 import { Link } from 'react-router-dom';
-
-export const BLOG_PATH = "/blog";
+import { BLOG_PATH } from '../Paths';
 
 export function Blog() {
+    
+    const blogData = getBlogs();
+
     return (
         <>
             <h1>Blog</h1>

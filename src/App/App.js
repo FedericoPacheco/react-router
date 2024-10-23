@@ -1,16 +1,17 @@
 import './App.css';
 import { HashRouter, Route, Routes } from 'react-router-dom';
-import { About, ABOUT_PATH } from './About/About';
-import { Home, HOME_PATH } from './Home/Home';
-import { Blog, BLOG_PATH } from './Blog/Blog';
+import { About } from './About/About';
+import { Home } from './Home/Home';
+import { Blog } from './Blog/Blog';
 import { BlogPost } from './Blog/BlogPost';
-import { Profile, PROFILE_PATH } from './Profile/Profile';
+import { EditBlogPost } from './Blog/EditBlogPost';
+import { Profile } from './Profile/Profile';
 import { NotFound } from './NotFound/NotFound';
 import { AuthOnly, AuthProvider } from './Auth/AuthContext';
-import { Login, LOGIN_PATH } from './Auth/Login';
-import { Logout, LOGOUT_PATH } from './Auth/Logout';
+import { Login } from './Auth/Login';
+import { Logout } from './Auth/Logout';
 import { Menu } from './Menu/Menu';
-
+import { HOME_PATH, ABOUT_PATH, BLOG_PATH, PROFILE_PATH, LOGIN_PATH, LOGOUT_PATH, EDIT_BLOG_PATH } from './Paths';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path = {BLOG_PATH} element = {<Blog/>}/>
             <Route path = {PROFILE_PATH} element = {<AuthOnly><Profile/></AuthOnly>}/>
             <Route path = {`${BLOG_PATH}/:slug`} element = {<BlogPost/>}/>
+            <Route path = {`${EDIT_BLOG_PATH}/:slug`} element = {<AuthOnly><EditBlogPost/></AuthOnly>}/>
             <Route path = {LOGIN_PATH} element = {<Login/>}/>
             <Route path = {LOGOUT_PATH} element = {<AuthOnly><Logout/></AuthOnly>}/>
             <Route path = "*" element = {<NotFound/>}/>

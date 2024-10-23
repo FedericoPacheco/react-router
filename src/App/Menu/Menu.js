@@ -1,12 +1,7 @@
 import React from 'react';
 import { useAuth } from '../Auth/AuthContext';
 import { NavLink } from 'react-router-dom';
-import { HOME_PATH } from '../Home/Home';
-import { ABOUT_PATH } from '../About/About';
-import { BLOG_PATH } from '../Blog/Blog';
-import { PROFILE_PATH } from '../Profile/Profile';
-import { LOGIN_PATH } from '../Auth/Login';
-import { LOGOUT_PATH } from '../Auth/Logout';
+import { HOME_PATH, ABOUT_PATH, BLOG_PATH, PROFILE_PATH, LOGIN_PATH, LOGOUT_PATH } from '../Paths';
 
 const routes = [
     {to: HOME_PATH, text: "Home", publicOnly: false, privateOnly: false},

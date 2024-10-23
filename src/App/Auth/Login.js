@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from './AuthContext';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { HOME_PATH } from '../Home/Home';
-
-export const LOGIN_PATH = "/login";
+import { HOME_PATH } from '../Paths';
 
 export function Login() {
     const auth = useAuth();
@@ -20,8 +18,6 @@ export function Login() {
             navigate(HOME_PATH);
         }
     }
-
-    console.log("auth.user:", auth.user);
 
     // i.e. you have to login
     if (!auth.user) {
