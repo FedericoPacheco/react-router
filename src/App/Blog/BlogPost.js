@@ -4,7 +4,7 @@ import { useAuth } from "../Auth/AuthContext";
 import { deleteBlog, findBlog } from "../Data/BlogData";
 import { NotFound } from "../NotFound/NotFound";
 import { BLOG_PATH, EDIT_BLOG_PATH } from "../Paths";
-import { canDeleteBlog, canEditBlog } from "./BlogPermissions";
+import { Permissions } from "../Auth/Permissions";
 
 export function BlogPost() {
     const auth = useAuth();
@@ -12,13 +12,13 @@ export function BlogPost() {
     const { slug } = useParams();
     const blog = findBlog(slug);
 
-    const canDelete = canDeleteBlog(auth, slug);
+    const canDelete = Permissions.Blog.canDelete(auth, slug);
     const onDelete = () => {
         deleteBlog(slug);
         navigate(BLOG_PATH);
     };
 
-    const canEdit = canEditBlog(auth, slug);
+    const canEdit = Permissions.Blog.canEdit(auth, slug);
     const onEdit = () => {
         navigate(`${EDIT_BLOG_PATH}/${slug}`); 
     };

@@ -12,8 +12,6 @@ export function Login() {
     const [wasSuccessful, setWasSuccessful] = useState(true);
 
     const fromPath = location.state?.from?.pathname;
-    console.log("fromPath:", fromPath);
-
     const validate = (e) => {
         e.preventDefault();
         const wasSucessfulAux = auth.login(user, pass);

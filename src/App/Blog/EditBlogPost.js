@@ -3,7 +3,7 @@ import { useAuth } from "../Auth/AuthContext";
 import { editBlog, findBlog } from "../Data/BlogData";
 import { useState } from "react";
 import { BLOG_PATH } from "../Paths";
-import { canEditBlog } from "./BlogPermissions";
+import { Permissions } from "../Auth/Permissions";
 
 export function EditBlogPost() {
     const auth = useAuth();
@@ -19,7 +19,7 @@ export function EditBlogPost() {
         navigate(`${BLOG_PATH}/${slug}`);
     };
 
-    const canEdit = canEditBlog(auth, slug);
+    const canEdit = Permissions.Blog.canEdit(auth, slug);
     if (canEdit) {
         return (
             <>

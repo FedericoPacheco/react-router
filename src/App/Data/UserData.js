@@ -1,4 +1,4 @@
-import { ADMIN, REGULAR, EDITOR } from "../Roles";
+import { ADMIN, REGULAR, EDITOR } from "../Auth/Roles";
 
 export const userData = [
     {user: "federicop", pass: "federicop", role: ADMIN},
