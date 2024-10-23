@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { userData } from "../Data/UserData";
 import { LOGIN_PATH } from "../Paths";
 
@@ -30,7 +30,6 @@ export function AuthProvider({children}) {
         console.log(`The user ${user} logged out`);
         setUser(null);
         setRole(null);
-        navigate(LOGIN_PATH);
     }
     
     return (
@@ -52,9 +51,11 @@ export function useAuth() {
 export function AuthOnly({children}) {
     
     const auth = useAuth();
-
+    const location = useLocation();
+    
     if (!auth.user) {
-        return <Navigate to = {LOGIN_PATH}/>
+        // Store the page from which the login was called
+        return <Navigate to = {LOGIN_PATH} state = {{from: location}} replace/> 
     } else {
         return children;
     }

@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { LOGIN_PATH } from "../Paths";
+import { HOME_PATH } from "../Paths";
 import { useAuth } from "./AuthContext";
 import { useEffect } from "react";
 
@@ -10,5 +10,5 @@ export function Logout() {
             auth.logout(); 
         }
     }, [auth]);
-    return <Navigate to = {LOGIN_PATH}/>
+    return <Navigate to = {HOME_PATH}/>
 }

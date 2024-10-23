@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from '../Auth/AuthContext';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { HOME_PATH, ABOUT_PATH, BLOG_PATH, PROFILE_PATH, LOGIN_PATH, LOGOUT_PATH } from '../Paths';
 
 const routes = [
@@ -15,6 +15,7 @@ const routes = [
 export function Menu() {
 
     const auth = useAuth();
+    const location = useLocation();
 
     return (
         <nav>
@@ -33,6 +34,7 @@ export function Menu() {
                                     ({color: isActive? "red":"blue"}) 
                                 }
                                 to = {route.to}
+                                state = {{from: location} /* Store the previous page in case the user wants to log in*/}
                             >
                                 {route.text}
                             </NavLink>

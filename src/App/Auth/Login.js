@@ -1,21 +1,27 @@
 import { useState } from 'react';
 import { useAuth } from './AuthContext';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { HOME_PATH } from '../Paths';
 
 export function Login() {
     const auth = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
     const [user, setUser] = useState("");
     const [pass, setPass] = useState("");
     const [wasSuccessful, setWasSuccessful] = useState(true);
+
+    const fromPath = location.state?.from?.pathname;
+    console.log("fromPath:", fromPath);
 
     const validate = (e) => {
         e.preventDefault();
         const wasSucessfulAux = auth.login(user, pass);
         setWasSuccessful(wasSucessfulAux);
         if (wasSucessfulAux) {
-            navigate(HOME_PATH);
+            // Redirect to page where the user was placed before logging in
+            // Replace: prevent user from going back and trying to login again
+            navigate(fromPath || HOME_PATH, { replace: true });
         }
     }
 
@@ -38,6 +44,6 @@ export function Login() {
         );
     // i.e. don't login again
     } else {
-        return <Navigate to = {HOME_PATH}/>
+        return <Navigate to = {fromPath || HOME_PATH}/>
     }
 }
